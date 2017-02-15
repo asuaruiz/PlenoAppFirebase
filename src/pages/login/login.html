@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      <img src="https://www.pleno.digital/assets/img/portal/logo_pleno_top.png" style="height: 40px;">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input #email formControlName="email" type="email" (change)="elementChanged(email)"
+        placeholder="Correo Electronico"
+        [class.invalid]="!loginForm.controls.email.valid &&
+          (emailChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid  &&
+      (emailChanged || submitAttempt)">
+      <p>Debe ingresar un correo valido.</p>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Contraseña</ion-label>
+      <ion-input #password formControlName="password" type="password"
+        (change)="elementChanged(password)"
+        placeholder="Contraseña"
+        [class.invalid]="!loginForm.controls.password.valid &&
+          (passwordChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid  &&
+      (passwordChanged || submitAttempt)">
+      <p>La constraseña debe tener mas de 6 letras o números</p>
+    </ion-item>
+
+    <button color="secondary" ion-button block type="submit">
+      Login
+    </button>
+
+  </form>
+
+  <button color="secondary" ion-button block clear (click)="goToResetPassword()">
+    Resetear Contraseña
+  </button>
+
+  <button color="secondary" ion-button block clear (click)="createAccount()">
+    Crear nueva cuenta
+  </button>
+
+</ion-content>
